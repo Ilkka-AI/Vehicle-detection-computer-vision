@@ -45,13 +45,14 @@ I tried various combinations of the HOG parameters and color space. I got the be
 
 #### 3. I trained a classifier using your selected HOG features (and color features if you used them).
 
-I trained a linear SVM using...
+I trained a linear SVM using the HOG features, color features and
 
-###Sliding Window Search
+### Sliding Window Search
 
-####1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
+### 
+I implemented a sliding window search for finding cars. I experimented with scale values, 1,1.5,2 and 3. I chose the value 1.5 as it detected the cars best. With this value, it was possible to obtain a good threshold for the heatmap. I searched only in the lower part of the image as this is where the cars are assumed to be located. 
 
-I decided to search random window positions at random scales all over the image and came up with this (ok just kidding I didn't actually ;):
+
 
 ![alt text][image3]
 
