@@ -77,6 +77,6 @@ Here is the integrated heatmap from 6 frames and the output of `scipy.ndimage.me
 
 ### Discussion
 
-The method worked reasonably in detecting a vechile. I reached a 99.23% classification accuracy in the training phase, however, I still found false positive and false negative detections. False positivies came out sometimes, even after a stringent thresholding. On the other hand, cars were not detected perfectly in all frames. The stringency of the threshold is a compromize between false positives and false negatives. Averaging over the frames helped a lot in both problems but still isn't perfect. 
+The method worked reasonably in detecting a vechile. I reached a 99.23% classification accuracy in the training phase, however, I still found false positive and false negative detections. False positivies came out sometimes, even after a stringent thresholding. On the other hand, cars were not detected perfectly in all frames. The stringency of the threshold is a compromize between false positives and false negatives. Averaging over the frames helped a lot in both problems but still isn't perfect. I had trouble detecting the car as it gets further away.
 
 
