@@ -47,8 +47,11 @@ I implemented a sliding window search for finding cars to go through all possibl
 ![Example of car matches found by a sliding window search][image3]
 
 I then extended the method to search in three different parts of the image using three different scales, 1,1.5 and 1.7. The three areas were:
+
 ystart = 350 ystop = 450 scale = 0.8
+
 ystart = 400 ystop = 600 scale = 1.5
+
 ystart = 400 ystop = 656 scale = 1.8
 
 
