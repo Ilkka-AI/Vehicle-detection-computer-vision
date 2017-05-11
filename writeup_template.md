@@ -46,7 +46,10 @@ I implemented a sliding window search for finding cars to go through all possibl
 
 ![Example of car matches found by a sliding window search][image3]
 
-I then extended the method to search in three different parts of the image using three different scales, 1,1.5 and 1.7, with y start and end point ystart = 350 ystop = 450 scale = 0.8, ystart = 400 ystop = 600 scale = 1.5, ystart = 400 ystop = 656 scale = 1.8.
+I then extended the method to search in three different parts of the image using three different scales, 1,1.5 and 1.7. The three areas were:
+ystart = 350 ystop = 450 scale = 0.8
+ystart = 400 ystop = 600 scale = 1.5
+ystart = 400 ystop = 656 scale = 1.8
 
 
 ### Video Implementation
@@ -55,18 +58,19 @@ Here's a [link to my video result](./project_output.mp4)
 
 I recorded the positions of positive detections in each frame of the video. From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions. Thresholding also removed outliers, since multiple detections were required to discover a car.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap. I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
 
-In order to further improve vechile detection and outlier removal, I then combined the heatmaps from 10 consecutive frames and used a stronger threshold. I optimized the performance of my detection method by studying different thresholds in integrating consecutive frames. A threshold of 20 gave a convincing performance.
 
 Here are six frames and their corresponding heatmaps:
 
 ![Six frames from the video and corresponding heatmaps][image5]
 
+### Integrating consecutive frames
+
+In order to further improve vechile detection and outlier removal, I then combined the heatmaps from 10 consecutive frames and used a stronger threshold. I optimized the performance of my detection method by studying different thresholds in integrating consecutive frames. A threshold of 20 gave a convincing performance.
+
 Here is the integrated heatmap from 6 frames and the output of `scipy.ndimage.measurements.label()` plotted with the corresponding bounding box:
+
 ![Integrated heatmap and bounding box representing the detected vechile][image6]
 
-
-
----
 
 ### Discussion
 
