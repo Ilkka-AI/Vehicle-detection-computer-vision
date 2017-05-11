@@ -16,7 +16,7 @@ The goals / steps of this project are the following:
 [image3]: ./examples/sliding_windows.PNG
 [image4]: ./examples/sliding_window.PNG
 [image5]: ./examples/bboxes_and_heat.PNG
-[image6]: ./examples/integrated.PNG
+[image6]: ./examples/integrateddetection.PNG
 
 [video1]: ./project_video.mp4
 
