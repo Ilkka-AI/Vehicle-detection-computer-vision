@@ -24,7 +24,7 @@ The goals / steps of this project are the following:
 
 
 
-###Histogram of Oriented Gradients (HOG)
+### Histogram of Oriented Gradients (HOG)
 
 ####1. Explain how (and identify where in your code) you extracted HOG features from the training images.
 
@@ -41,22 +41,17 @@ Here is an example using the `HSL` color space and HOG parameters of `orientatio
 
 #### 2. Explain how you settled on your final choice of HOG parameters.
 
-I tried various combinations of the HOG parameters and color space. I got the best classification accuracy using the HSL space and parameter values `orientations=8`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`.
+I tried various combinations of the HOG parameters and color space. I got the best classification accuracy using the HSL space, HOG features together with spatially binned color and histograms of color in the feature vector with parameter values `orientations=8`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`. With this setup I reached the best classification accuracy with the linear SVM, 99.23% accuracy. Features were scaled. 
 
-#### 3. I trained a classifier using your selected HOG features (and color features if you used them).
-
-I trained a linear SVM using the HOG features, color features and
 
 ### Sliding Window Search
 
 ### 
 I implemented a sliding window search for finding cars. I experimented with scale values, 1,1.5,2 and 3. I chose the value 1.5 as it detected the cars best. With this value, it was possible to obtain a good threshold for the heatmap. I searched only in the lower part of the image as this is where the cars are assumed to be located. 
 
-
-
 ![alt text][image3]
 
-####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
+I then searched in three different parts of the image using three different scales, 0.8,1.5 and 1.8. 
 
 Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
 
@@ -65,35 +60,29 @@ Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spat
 
 ### Video Implementation
 
-####1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
 Here's a [link to my video result](./project_video.mp4)
 
 
-####2. 
-
 I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions. Thresholding also removed outliers, since multiple detections were required to discover a car.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap. I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
 
-In order to further improve vechile detection and outlier removal, I then combined the heatmaps from consecutive frames and used a stronger threshold.
+In order to further improve vechile detection and outlier removal, I then combined the heatmaps from 10 consecutive frames and used a stronger threshold. I optimized the performance of my detection method by studying different thresholds in when integrating consecutive frames. A threshold of 20 gave a convincing performance.
 
 Here's an example result showing the heatmap from a series of frames of video, the result of `scipy.ndimage.measurements.label()` and the bounding boxes then overlaid on the last frame of video:
 
-### Here are six frames and their corresponding heatmaps:
+Here are six frames and their corresponding heatmaps:
 
-![alt text][image5]
+![Six frames from the video and corresponding heatmaps][image5]
 
-### Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames:
-![alt text][image6]
-
-### Here the resulting bounding boxes are drawn onto the last frame in the series:
-![alt text][image7]
+Here is the integrated heatmap from 6 frames and the output of `scipy.ndimage.measurements.label()` plotted with the corresponding bounding box:
+![Integrated heatmap and bounding box representing the detected vechile][image6]
 
 
 
 ---
 
-###Discussion
+### Discussion
 
-####1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+I reached a 99.23% classification accuracy in the training phase, however, I still found false positive and false negative detections. False positivies came out sometimes, even after a stringent thresholding. On the other hand, cars were not detected perfectly in all frames and the stringency of the threshold is a compromize between false positives and false negatives. Averaging over the frames helped a lot in both problems but still isn't perfect. 
+
 
